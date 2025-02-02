@@ -17,7 +17,7 @@ namespace Diary
         /// <summary>
         /// получение таблицы с датами
         /// </summary>
-        public DbSet<Date> Dates => Set<Date>();
+        //public DbSet<Date> Dates => Set<Date>();
 
         public ConnectionDB()
         {
@@ -28,8 +28,6 @@ namespace Diary
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=DESKTOP-5DQNS6K\SQLEXPRESS;Database=DiaryDB;Trusted_Connection=True; Encrypt=False");
-
-
         }
     }
 }

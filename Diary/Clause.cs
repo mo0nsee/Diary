@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Diary
 {
@@ -16,7 +18,8 @@ namespace Diary
         private int _id; // id
         private string _description; //Описание
         private string _type; //Тип
-        private bool? _close; // Закрытие(действует только при типе == цель)
+        private bool? _close; // Закрытие(действует только при типе == задача)
+        private Date _date; // Дата
 
         private Type _typeClause;
 
@@ -56,6 +59,12 @@ namespace Diary
             set => _close = value;
         }
 
+        public Date Date 
+        {
+            get => _date;
+            set => _date = value;
+        }
+
         /// <summary>
         /// Преобразование типа к строке
         /// </summary>
@@ -65,6 +74,7 @@ namespace Diary
             {
                 case Diary.Type.Task:
                     _type = "Задача";
+                    _close = false;
                     break;
                 case Diary.Type.Reminder:
                     _type = "Напоминание";
@@ -78,21 +88,22 @@ namespace Diary
         /// <summary>
         /// Добавление Задачи
         /// </summary>
-        public void AddElement(ConnectionDB db, string description, DateTime dateStart, DateTime dateEnd)
+        public void AddElement(ConnectionDB db, DateTime dateStart, DateTime dateEnd)
         {
-            Date date = new Date() { DateStart = dateStart, Description = description, Close = true, Type = _type };
-
-            db.Clauses.Add(date);
+            _date = new Date() { DateStart = dateStart, DateEnd = dateEnd };
+            //db.Dates.Add(date);
+            db.Clauses.Add(this);
             db.SaveChanges();
         }
 
         /// <summary>
         /// Добавление Напоминания
         /// </summary>
-        public void AddElement(ConnectionDB db, string description, DateTime dateStart)
+        public void AddElement(ConnectionDB db, DateTime dateStart)
         {
-            Date date = new Date() { DateStart = dateStart, Description = description, Type = _type };
-            db.Clauses.Add(date);
+            _date = new Date() { DateStart = dateStart };
+            //db.Dates.Add(date);
+            db.Clauses.Add(this);
             db.SaveChanges();
         }
 

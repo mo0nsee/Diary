@@ -1,4 +1,6 @@
-﻿using System.Configuration;
+﻿using System.Collections.ObjectModel;
+using System.Configuration;
+using System.Data;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,18 +23,37 @@ namespace Diary
         {
             InitializeComponent();
         }
-
+        ConnectionDB db;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ConnectionDB db = new ConnectionDB();
+            db = new ConnectionDB();
             db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
 
-            Clause clause = new Clause(Type.Reminder);
-            clause.AddElement(db, "Проверка", new DateTime(2025, 1, 26));
+            Clause clause1 = new Clause(Type.Reminder) { Description = "Проверка" };
+            clause1.AddElement(db, new DateTime(2025, 1, 26));
 
-            clause = new Clause(Type.Task);
-            clause.AddElement(db, "Проверка", new DateTime(2025, 1, 26), new DateTime(2025, 1, 28));
+            //ClauseGrid.Items.Add(clause);
+
+            Clause clause2 = new Clause(Type.Task) { Description = "Проверка" };
+            clause2.AddElement(db, new DateTime(2025, 1, 26), new DateTime(2025, 1, 28));
+
+            var values = new ObservableCollection<Clause>
+            {
+                clause1,
+                clause2
+            };
+            ClauseGrid.ItemsSource = values;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            foreach (Clause selectedClause in ClauseGrid.SelectedItems)
+            {
+                MessageBox.Show($"Выбрано: {selectedClause.Description}, {selectedClause.Date.DateStart:dd.MM.yyyy}, {selectedClause.Date.DateEnd:dd.MM.yyyy}, Закрыто: {selectedClause.Close}");
+                db.Clauses.Update(selectedClause);
+                db.SaveChanges();
+            }
         }
     }
 }

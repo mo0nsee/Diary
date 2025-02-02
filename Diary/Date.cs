@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -11,10 +12,17 @@ namespace Diary
     /// <summary>
     /// Дата пункта
     /// </summary>
-    public class Date : Clause
+    public class Date/* : Clause*/
     {
+        private int _id; // id
         private DateTime _dateStart; //Дата начала
         private DateTime? _dateEnd; //Дата конца (действует только при типе == цель)
+
+        public int Id
+        {
+            get => _id;
+            set => _id = value;
+        }
 
         /// <summary>
         /// Дата начала

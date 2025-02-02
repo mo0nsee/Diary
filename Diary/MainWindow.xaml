@@ -5,9 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Diary"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="727">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="354,184,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-
+        <DataGrid Name="ClauseGrid" Margin="0,0,0,168" IsReadOnly="False" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="Description" Header="Описание" Width="150" Binding="{Binding Description}"/>
+                <DataGridTextColumn x:Name="DateStart" Header="Начальная дата" Width="150"  Binding="{Binding Date.DateStart, StringFormat='dd.MM.yyyy'}"/>
+                <DataGridTextColumn x:Name="DateEnd" Header="Конечная дата" Width="150"  Binding="{Binding Date.DateEnd, StringFormat='dd.MM.yyyy'}"/>
+                <DataGridCheckBoxColumn x:Name="CloseClause" Header="Закрытие задачи"  Width="150" Binding="{Binding Close}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Button" HorizontalAlignment="Left" Click="Button_Click" Width="82" Margin="10,286,0,116"/>
+        <Button Content="Button1" HorizontalAlignment="Left" Click="Button_Click_1" Width="82" Margin="170,286,0,116"/>
     </Grid>
 </Window>
