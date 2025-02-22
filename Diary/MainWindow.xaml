@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:Diary"
         mc:Ignorable="d"
         Language="ru-RU"
-        Title="MainWindow" Height="450" Width="727">
+        Title="MainWindow" Height="450" Width="727"
+        Closing="Window_Closing">
+    <Window.Resources>
+        <local:NullToFalseConverter x:Key="NullToFalseConverter"/>
+    </Window.Resources>
     <Grid>
         <DataGrid Name="ClauseGrid" Margin="0,0,0,168" IsReadOnly="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
@@ -18,17 +22,25 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Начальная дата" Width="150">
+                <DataGridTemplateColumn Header="Конечная дата" Width="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <DatePicker x:Name="datePicker2" SelectedDateFormat="Short" SelectedDate="{Binding Date.DateEnd, UpdateSourceTrigger=PropertyChanged}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridCheckBoxColumn x:Name="CloseClause" Header="Закрытие задачи"  Width="150" Binding="{Binding Close}"/>
+                <DataGridTemplateColumn Header="Закрытие задачи" Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox HorizontalAlignment="Center" IsChecked="{Binding Close, UpdateSourceTrigger=PropertyChanged}"
+                                      IsEnabled="{Binding Close, Converter={StaticResource NullToFalseConverter}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Button" HorizontalAlignment="Left" Click="Button_Click" Width="82" Margin="10,286,0,88"/>
         <Button Content="Button1" HorizontalAlignment="Left" Click="Button_Click_1" Width="82" Margin="170,286,0,88"/>
+        <Button Content="Button2" HorizontalAlignment="Left" Click="Button_Click_2" Width="82" Margin="320,286,0,88"/>
     </Grid>
 </Window>

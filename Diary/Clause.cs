@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.Intrinsics.X86;
 using System.Text;
@@ -65,6 +66,16 @@ namespace Diary
             set => _date = value;
         }
 
+        [NotMapped]
+        public Type TypeClause
+        {
+            get => _typeClause;
+            set { 
+                    _typeClause = value;
+                    TypeConversion();
+                }
+        }
+
         /// <summary>
         /// Преобразование типа к строке
         /// </summary>
@@ -111,11 +122,11 @@ namespace Diary
         /// Создание экземпляра с определением типа задачи
         /// </summary>
         /// <param name="typeClause"></param>
-        public Clause(Type typeClause) 
-        {
-            _typeClause = typeClause;
-            TypeConversion();
-        }
+        //public Clause(Type typeClause) 
+        //{
+        //    _typeClause = typeClause;
+        //    TypeConversion();
+        //}
 
         public Clause()
         {

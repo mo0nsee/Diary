@@ -9,6 +9,16 @@ namespace Diary
 {
     public class ConnectionDB : DbContext
     {
+        private static ConnectionDB instance;
+
+        public static ConnectionDB getInstance()
+        {
+            if (instance == null)
+                instance = new ConnectionDB();
+            return instance;
+        }
+
+
         /// <summary>
         /// Получение таблицы с пунктами
         /// </summary>
@@ -19,8 +29,15 @@ namespace Diary
         /// </summary>
         //public DbSet<Date> Dates => Set<Date>();
 
-        public ConnectionDB()
+        private ConnectionDB()
         {
+            //Проверка есть ли база данных, если нет, то ей создание
+            //Database.EnsureCreated();
+        }
+
+        public void Close()
+        {
+            Database.CloseConnection();
             //Проверка есть ли база данных, если нет, то ей создание
             //Database.EnsureCreated();
         }
