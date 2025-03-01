@@ -30,9 +30,12 @@ namespace Diary
             this.IsVisibleChanged += MainWindow_IsVisibleChanged;
         }
 
+        /// <summary>
+        /// Содержимое Grid 
+        /// </summary>
         ObservableCollection<Clause> values;
 
-        ObservableCollection<Clause> valuesPrer;
+        //Обновление содержимого при каждом открытии
         private void MainWindow_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (this.IsVisible) // Если окно стало видимым
@@ -46,6 +49,7 @@ namespace Diary
             }
         }
         
+        //Добавление записи
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             // Создание окна
@@ -53,32 +57,15 @@ namespace Diary
             // Открытие окна
             window.Show();
             this.Hide();
-
-            //db.Database.EnsureDeleted();
-            //db.Database.EnsureCreated();
-            //Clause clause1 = new Clause(Type.Reminder) { Description = "Проверка" };
-            //clause1.AddElement(db, new DateTime(2025, 1, 26));
-
-            //Clause clause2 = new Clause(Type.Task) { Description = "Проверка" };
-            //clause2.AddElement(db, new DateTime(2025, 1, 26), new DateTime(2025, 1, 28));
-
-            //var values = new ObservableCollection<Clause>
-            //{
-            //    clause1,
-            //    clause2
-            //};
-            //ClauseGrid.ItemsSource = values;
         }
 
+        //Сохранение изменений
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            //foreach (Clause selectedClause in ClauseGrid.SelectedItems)
-            //{
-            //    db.Clauses.Update(selectedClause);
-            //}
             db.SaveChanges();
         }
 
+        //Удаление записи
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             if (ClauseGrid.ItemsSource is ObservableCollection<Clause> clausesList)
@@ -99,18 +86,10 @@ namespace Diary
                 db.SaveChanges();
             }
         }
-
+        
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             MessageBox.Show("Все несохраннённые изменения будут потеряны");
-            //valuesPrer = (ObservableCollection<Clause>)ClauseGrid.ItemsSource;
-            //int i = 0;
-            //foreach (Clause selectedClause in db.Clauses.ToList())
-            //{
-            //    if (!valuesPrer[i].Equals(selectedClause))
-            //        MessageBox.Show("Изменения не сохраненены");
-            //    i++;
-            //}
             db.Close();
         }
     }

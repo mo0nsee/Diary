@@ -8,6 +8,9 @@ using System.Windows.Data;
 
 namespace Diary
 {
+    /// <summary>
+    /// Класс для преобразование checkBox в null
+    /// </summary>
     public class NullToFalseConverter : IValueConverter
     {
         public object Convert(object value, System.Type targetType, object parameter, CultureInfo culture)

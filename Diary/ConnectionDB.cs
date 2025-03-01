@@ -7,10 +7,16 @@ using System.Threading.Tasks;
 
 namespace Diary
 {
+    /// <summary>
+    /// Соединение с бд
+    /// </summary>
     public class ConnectionDB : DbContext
     {
         private static ConnectionDB instance;
-
+        /// <summary>
+        /// Создание экземпляра
+        /// </summary>
+        /// <returns></returns>
         public static ConnectionDB getInstance()
         {
             if (instance == null)
@@ -18,22 +24,10 @@ namespace Diary
             return instance;
         }
 
-
         /// <summary>
         /// Получение таблицы с пунктами
         /// </summary>
         public DbSet<Clause> Clauses => Set<Clause>();
-
-        /// <summary>
-        /// получение таблицы с датами
-        /// </summary>
-        //public DbSet<Date> Dates => Set<Date>();
-
-        private ConnectionDB()
-        {
-            //Проверка есть ли база данных, если нет, то ей создание
-            //Database.EnsureCreated();
-        }
 
         public void Close()
         {

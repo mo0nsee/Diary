@@ -41,10 +41,5 @@ namespace Diary
             get => _dateEnd;
             set => _dateEnd = value;
         }
-
-        public Date()
-        {
-        }
-
     }
 }

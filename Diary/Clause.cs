@@ -66,6 +66,9 @@ namespace Diary
             set => _date = value;
         }
 
+        /// <summary>
+        /// Тип пункта
+        /// </summary>
         [NotMapped]
         public Type TypeClause
         {
@@ -116,20 +119,6 @@ namespace Diary
             //db.Dates.Add(date);
             db.Clauses.Add(this);
             db.SaveChanges();
-        }
-
-        /// <summary>
-        /// Создание экземпляра с определением типа задачи
-        /// </summary>
-        /// <param name="typeClause"></param>
-        //public Clause(Type typeClause) 
-        //{
-        //    _typeClause = typeClause;
-        //    TypeConversion();
-        //}
-
-        public Clause()
-        {
         }
     }
 }

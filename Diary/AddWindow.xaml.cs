@@ -25,8 +25,14 @@ namespace Diary
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Добавление записи в бд
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            //Проверка обязательных полей
             if(DateStart.SelectedDate == null || Description == null)
             {
                 MessageBox.Show("Одно из полей не заполнено!!!");
@@ -43,14 +49,20 @@ namespace Diary
                 TypeClause = DateEnd.SelectedDate == null ? Type.Reminder : Type.Task
             };
 
+            //Добавление в бд
             ConnectionDB db = ConnectionDB.getInstance();
             db.Entry(clause.Date).State = EntityState.Added;
             db.Clauses.Add(clause);
-
             db.SaveChanges();
 
+            //Закрытие формы и открытие другой
             this.Close();
+            Application.Current.Windows[0].Show();
+        }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            //Закрытие формы и открытие другой
             Application.Current.Windows[0].Show();
         }
     }

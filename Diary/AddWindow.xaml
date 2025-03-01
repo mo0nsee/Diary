@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Diary"
         mc:Ignorable="d"
-        Title="AddWindow" Height="316" Width="279">
+        Title="AddWindow" Height="316" Width="294"
+        Closing="Window_Closing"
+        ResizeMode="NoResize">
     <Grid>
         <TextBlock  Text="Описание" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="Description" SpellCheck.IsEnabled="True" Language="ru-ru" Margin="80,18,10,0" VerticalAlignment="Top" Height="68" TextWrapping="Wrap"/>

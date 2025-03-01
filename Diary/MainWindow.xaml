@@ -6,13 +6,14 @@
         xmlns:local="clr-namespace:Diary"
         mc:Ignorable="d"
         Language="ru-RU"
-        Title="MainWindow" Height="450" Width="727"
-        Closing="Window_Closing">
+        Title="MainWindow" Height="395" Width="727"
+        Closing="Window_Closing"
+        ResizeMode="NoResize">
     <Window.Resources>
         <local:NullToFalseConverter x:Key="NullToFalseConverter"/>
     </Window.Resources>
     <Grid>
-        <DataGrid Name="ClauseGrid" Margin="0,0,0,168" IsReadOnly="False" AutoGenerateColumns="False">
+        <DataGrid Name="ClauseGrid" Margin="0,0,0,98" IsReadOnly="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="Description" Header="Описание" Width="150" Binding="{Binding Description}"/>
                 <DataGridTemplateColumn Header="Начальная дата" Width="150">
@@ -39,8 +40,8 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Button" HorizontalAlignment="Left" Click="Button_Click" Width="82" Margin="10,286,0,88"/>
-        <Button Content="Button1" HorizontalAlignment="Left" Click="Button_Click_1" Width="82" Margin="170,286,0,88"/>
-        <Button Content="Button2" HorizontalAlignment="Left" Click="Button_Click_2" Width="82" Margin="320,286,0,88"/>
+        <Button Content= "Добавить запись" HorizontalAlignment="Left" Click="Button_Click" Width="120" Margin="10,286,0,29"/>
+        <Button Content="Сохранить изменения" HorizontalAlignment="Left" Click="Button_Click_1" Width="152" Margin="151,286,0,29"/>
+        <Button Content="Удалить запись" HorizontalAlignment="Left" Click="Button_Click_2" Width="149" Margin="320,286,0,29"/>
     </Grid>
 </Window>
