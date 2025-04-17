@@ -102,23 +102,23 @@ namespace Diary
         /// <summary>
         /// Добавление Задачи
         /// </summary>
-        public void AddElement(ConnectionDB db, DateTime dateStart, DateTime dateEnd)
-        {
-            _date = new Date() { DateStart = dateStart, DateEnd = dateEnd };
-            //db.Dates.Add(date);
-            db.Clauses.Add(this);
-            db.SaveChanges();
-        }
+        //public void AddElement(ConnectionDB db, DateTime dateStart, DateTime dateEnd)
+        //{
+        //    _date = new Date() { DateStart = dateStart, DateEnd = dateEnd };
+        //    //db.Dates.Add(date);
+        //    db.Clauses.Add(this);
+        //    db.SaveChanges();
+        //}
 
         /// <summary>
         /// Добавление Напоминания
         /// </summary>
-        public void AddElement(ConnectionDB db, DateTime dateStart)
-        {
-            _date = new Date() { DateStart = dateStart };
-            //db.Dates.Add(date);
-            db.Clauses.Add(this);
-            db.SaveChanges();
-        }
+        //public void AddElement(ConnectionDB db, DateTime dateStart)
+        //{
+        //    _date = new Date() { DateStart = dateStart };
+        //    //db.Dates.Add(date);
+        //    db.Clauses.Add(this);
+        //    db.SaveChanges();
+        //}
     }
 }
