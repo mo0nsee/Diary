@@ -32,8 +32,6 @@ namespace Diary
         public void Close()
         {
             Database.CloseConnection();
-            //Проверка есть ли база данных, если нет, то ей создание
-            //Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
